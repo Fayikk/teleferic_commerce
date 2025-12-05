@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35309.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teleferic_commerce_core", "teleferic_commerce_core\teleferic_commerce_core.csproj", "{0ABB27D7-3709-45A7-AE51-EE48ABD67690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teleferic_commerce_infrastructure", "teleferic_commerce_infrastructure\teleferic_commerce_infrastructure.csproj", "{AD7CE1AB-FE8D-4D40-9A48-8D1432B94A3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teleferic_core_domain", "teleferic_core_domain\teleferic_core_domain.csproj", "{7C080F50-D4F6-45B3-82BE-B23DAF1BC26B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teleferic_commerce_api", "teleferic_commerce_api\teleferic_commerce_api.csproj", "{6676B41B-A064-42D4-AAA6-7D6996B6743A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0ABB27D7-3709-45A7-AE51-EE48ABD67690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ABB27D7-3709-45A7-AE51-EE48ABD67690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ABB27D7-3709-45A7-AE51-EE48ABD67690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ABB27D7-3709-45A7-AE51-EE48ABD67690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD7CE1AB-FE8D-4D40-9A48-8D1432B94A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7CE1AB-FE8D-4D40-9A48-8D1432B94A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7CE1AB-FE8D-4D40-9A48-8D1432B94A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7CE1AB-FE8D-4D40-9A48-8D1432B94A3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C080F50-D4F6-45B3-82BE-B23DAF1BC26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C080F50-D4F6-45B3-82BE-B23DAF1BC26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C080F50-D4F6-45B3-82BE-B23DAF1BC26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C080F50-D4F6-45B3-82BE-B23DAF1BC26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6676B41B-A064-42D4-AAA6-7D6996B6743A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6676B41B-A064-42D4-AAA6-7D6996B6743A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6676B41B-A064-42D4-AAA6-7D6996B6743A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6676B41B-A064-42D4-AAA6-7D6996B6743A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F60F229F-AB44-45E6-92F2-BC5E9C432492}
+	EndGlobalSection
+EndGlobal
