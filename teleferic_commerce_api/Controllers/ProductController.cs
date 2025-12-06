@@ -16,8 +16,8 @@ namespace teleferic_commerce_api.Controllers
             this.productService = productService;
         }
 
-        [HttpGet("category/{categoryId}")]
-        public async Task<IActionResult> GetProducts(Guid categoryId)
+        [HttpGet("category")]
+        public async Task<IActionResult> GetProducts([FromQuery]Guid categoryId)
         {
             var result = await productService.GetProducts(categoryId);
 

@@ -100,7 +100,7 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
                 };
             }
             mapper.Map(categoryDTO, category);
-            _unitOfWork.Categories.Update(category);
+            await _unitOfWork.Categories.Update(category);
             await _unitOfWork.SaveAsync();
             var updatedCategoryDTO = mapper.Map<CategoryDTO>(category);
             return new ResponseModel<CategoryDTO>

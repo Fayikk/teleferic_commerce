@@ -45,14 +45,20 @@ namespace teleferic_commerce_infrastructure.Concrete.Repository
 
         public async Task<IEnumerable<T>> GetAllAsyncWithInclude(Expression<Func<T, bool>> predicate, Func<IQueryable<T>, IIncludableQueryable<T, object>> includeExpression, bool asNoTracking = true)
         {
-            var query = _dbSet.Where(predicate);
+            IQueryable<T> query = _dbSet;
             if (asNoTracking)
             {
                 query = query.AsNoTracking();
             }
-
-            query = includeExpression(query);
-            return query.AsEnumerable();
+            if(predicate!= null)
+            {
+                query = query.Where(predicate);
+            }
+            if (includeExpression != null)
+            {
+                query = includeExpression(query);
+            }
+            return await query.ToListAsync();
         }
 
         public async Task<T?> GetByIdAsync(Guid Id, bool asNoTracking = true)
@@ -87,7 +93,7 @@ namespace teleferic_commerce_infrastructure.Concrete.Repository
             }
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             _dbSet.Update(entity);  
         }

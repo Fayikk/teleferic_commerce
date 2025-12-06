@@ -20,6 +20,8 @@ namespace teleferic_commerce_core.DTO.Order
         public decimal TotalAmount { get; set; }
         public string PaymentStatus { get; set; } = string.Empty;
         public string OrderStatus { get; set; } = string.Empty;
+        public string PaymentId { get; set; } = string.Empty;
+
         public DateTime CreatedAt { get; set; }
         public ICollection<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
     }

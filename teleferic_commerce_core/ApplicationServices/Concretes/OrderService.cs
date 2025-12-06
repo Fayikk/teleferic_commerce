@@ -153,7 +153,7 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
                 PaymentId = paymentResult.PaymentId,
                 PaymentStatus = "Completed",
                 OrderStatus = "Processing",
-                OrderItems = orderItems
+                OrderItems = orderItems,
             };
 
             unitOfWork.Orders.AddAsync(order);

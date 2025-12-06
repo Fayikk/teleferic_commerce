@@ -75,7 +75,11 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
                 if (currentMainImage != null)
                 {
                     currentMainImage.IsMain = false;
+                    await uow.ProductImages.Update(currentMainImage);
+                    await uow.SaveAsync();
+
                 }
+
             }
 
             var productImage = new ProductImage
@@ -165,18 +169,39 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
         }
         public async Task<ResponseModel<IEnumerable<ProductDTO>>> GetProducts(Guid categoryId)
         {
-            var products =await uow.Products.GetAllAsyncWithInclude(
-                predicate: p => p.CategoryId == categoryId,
-                includeExpression: p => p.Include(pr => pr.ProductImages)
-            );
-            var productsDTO = mapper.Map<IEnumerable<ProductDTO>>(products);
-            var response = new ResponseModel<IEnumerable<ProductDTO>>
+
+            if (categoryId.ToString().StartsWith("000"))
             {
-                Data = productsDTO,
-                IsSuccess = true,
-                Message = "Products retrieved successfully"
-            };
-            return response;
+                var products = await uow.Products.GetAllAsyncWithInclude(
+                 null,
+                 includeExpression: p => p.Include(pr => pr.ProductImages).Include(x => x.Category)
+             );
+                var productsDTO = mapper.Map<IEnumerable<ProductDTO>>(products);
+                var response = new ResponseModel<IEnumerable<ProductDTO>>
+                {
+                    Data = productsDTO,
+                    IsSuccess = true,
+                    Message = "Products retrieved successfully"
+                };
+                return response;
+            }
+            else
+            {
+                var products = await uow.Products.GetAllAsyncWithInclude(
+               predicate: p => p.CategoryId == categoryId,
+               includeExpression: p => p.Include(pr => pr.ProductImages)
+           );
+                var productsDTO = mapper.Map<IEnumerable<ProductDTO>>(products);
+                var response = new ResponseModel<IEnumerable<ProductDTO>>
+                {
+                    Data = productsDTO,
+                    IsSuccess = true,
+                    Message = "Products retrieved successfully"
+                };
+                return response;
+            }
+
+           
         }
 
         public async Task<ResponseModel<ProductDTO>> GetProductById(Guid Id)
@@ -208,7 +233,7 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
                 };
             }
             mapper.Map(dto, product);
-            uow.Products.Update(product);
+            await uow.Products.Update(product);
             await uow.SaveAsync();
             var productDTO = mapper.Map<ProductDTO>(product);
             return new ResponseModel<ProductDTO>

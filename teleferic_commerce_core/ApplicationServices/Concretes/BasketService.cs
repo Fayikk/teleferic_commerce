@@ -18,6 +18,7 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
         {
             this.mapper = mapper;
             _memoryRepository = memoryRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseModel<bool>> DeleteBasketAsync(string basketId)

@@ -105,17 +105,17 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
             };
         }
 
-        public Task<ResponseModel<bool>> UpdateAddressAsync(Guid id, UpdateAddressDTO updateAddressDTO)
+        public async Task<ResponseModel<bool>> UpdateAddressAsync(Guid id, UpdateAddressDTO updateAddressDTO)
         {
             var address = unitOfWork.Addresses.FindAsync(x => x.Id == id && x.UserId == UserId).Result;
             if (address is null)
             {
-                return Task.FromResult(new ResponseModel<bool>
+                return new ResponseModel<bool>
                 {
                     IsSuccess = false,
                     Data = false,
                     Message = "Address not found."
-                });
+                };
             }
             if (updateAddressDTO.IsDefault)
             {
@@ -126,14 +126,15 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
                 }
             }
             mapper.Map(updateAddressDTO, address);
-            unitOfWork.Addresses.Update(address.FirstOrDefault());
+            var adres = address.FirstOrDefault();
+            await unitOfWork.Addresses.Update(adres);
             unitOfWork.SaveAsync().Wait();
-            return Task.FromResult(new ResponseModel<bool>
+            return new ResponseModel<bool>
             {
                 IsSuccess = true,
                 Data = true,
                 Message = "Address updated successfully."
-            });
+            };
         }
     }
 }
