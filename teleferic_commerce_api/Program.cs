@@ -161,12 +161,10 @@ using (var scope = app.Services.CreateScope())
 
 
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
+
         app.UseSwagger();
         app.UseSwaggerUI();
-    }
+    
 
 app.UseHttpsRedirection();
 
