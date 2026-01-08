@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using teleferic_commerce_core.ApplicationServices.Interfaces;
 using teleferic_commerce_core.DTO.Category;
+using teleferic_commerce_core.Validators;
 using teleferic_commerce_infrastructure.Models;
 using teleferic_commerce_infrastructure.UoW;
 using teleferic_core_domain.Entities;
@@ -11,14 +13,24 @@ namespace teleferic_commerce_core.ApplicationServices.Concretes
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper mapper;
-        public CategoryService(IUnitOfWork unitOfWork,IMapper mapper)
+        private readonly IValidator<CreateCategoryDTO> _categoryValidator;
+        public CategoryService(IUnitOfWork unitOfWork,IMapper mapper,IValidator<CreateCategoryDTO> categoryValidator)
         {
+            _categoryValidator = categoryValidator;
             this.mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseModel<CategoryDTO>> CreateCategory(CreateCategoryDTO categoryDTO)
         {
+
+           var result = await _categoryValidator.ValidateAsync(categoryDTO);
+
+            if (!result.IsValid)
+            {
+                List<string> messages = new List<string>();
+                result.Errors.ForEach(x => messages.Add(x.ErrorMessage.ToString()));
+            }
             var category = mapper.Map<Category>(categoryDTO);
             await _unitOfWork.Categories.AddAsync(category);
             await _unitOfWork.SaveAsync();

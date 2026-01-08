@@ -5,6 +5,17 @@ using teleferic_commerce_core.DTO.Address;
 
 namespace teleferic_commerce_api.Controllers
 {
+    public class UploadBinaryDto
+    {
+        public byte[] Data { get; set; }
+    }
+
+
+
+
+
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class AddressController : ControllerBase
@@ -16,6 +27,7 @@ namespace teleferic_commerce_api.Controllers
             _addressService = addressService;
         }
 
+       
         [HttpPost]
         public async Task<IActionResult> CreateAddress([FromBody] CreateAddressDTO createAddressDTO)
         {
@@ -24,6 +36,20 @@ namespace teleferic_commerce_api.Controllers
                 return CreatedAtAction(nameof(GetAddressById), new { id = result.Data.Id },result.Data);
             return BadRequest(result);
         }
+
+
+        [HttpPost("upload-binary")]
+        public IActionResult UploadBinary([FromBody] UploadBinaryDto dto)
+        {
+            if (dto.Data == null || dto.Data.Length == 0)
+                return BadRequest("Byte data boş olamaz.");
+
+            // dto.Data => byte[]
+            return Ok(new { Size = dto.Data.Length });
+        }
+
+
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAddress(Guid id, [FromBody] UpdateAddressDTO updateAddressDTO)

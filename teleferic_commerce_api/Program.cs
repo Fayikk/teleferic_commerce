@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,7 @@ using StackExchange.Redis;
 using System.Text;
 using teleferic_commerce_core.ApplicationServices.Concretes;
 using teleferic_commerce_core.ApplicationServices.Interfaces;
+using teleferic_commerce_core.DTO.Category;
 using teleferic_commerce_core.Mapping;
 using teleferic_commerce_infrastructure.Concrete.Repository;
 using teleferic_commerce_infrastructure.Extensions.TokenExtensions;
@@ -52,6 +55,10 @@ builder.Services.AddIdentity<ApplicationUser,IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 6;
 }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryDTO>();
+
+
 
 builder.Services.AddCors(options =>
 {
